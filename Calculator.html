@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Operation Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        textarea {
+            width: 80%;
+            max-width: 400px;
+            height: 150px;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+        button:active {
+            background-color: #d84315;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ffeb3b;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .blog-link {
+            margin-top: 30px;
+        }
+        .blog-button {
+            background: linear-gradient(45deg, #ff6f61, #f5af19);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+        .blog-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.7);
+        }
+        .blog-button:active {
+            transform: scale(1.05);
+        }
+        .hint {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #ffccbc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multi-Operation Calculator</h1>
+    <p>Enter numbers below, one per line. Then choose an operation:</p>
+    <div class="container">
+        <textarea id="numbers" placeholder="Enter numbers here, one per line"></textarea><br>
+        <button onclick="calculate('add')">Addition</button>
+        <button onclick="calculate('subtract')">Subtraction</button>
+        <button onclick="calculate('multiply')">Multiplication</button>
+        <button onclick="calculate('divide')">Division</button>
+        <div class="result">
+            <h2 id="result"></h2>
+        </div>
+    </div>
+    <div class="blog-link">
+        <button class="blog-button" onclick="window.open('https://medium.com/@kbala7092', '_blank')">Visit Bala's Blog</button>
+        <p class="hint">Created by Bala</p>
+    </div>
+    <script>
+        function calculate(operation) {
+            const input = document.getElementById('numbers').value;
+            const numbers = input.split('\n').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+            
+            if (numbers.length === 0) {
+                document.getElementById('result').innerText = 'Please enter valid numbers!';
+                return;
+            }
+
+            let result;
+            switch (operation) {
+                case 'add':
+                    result = numbers.reduce((acc, num) => acc + num, 0);
+                    break;
+                case 'subtract':
+                    result = numbers.reduce((acc, num) => acc - num);
+                    break;
+                case 'multiply':
+                    result = numbers.reduce((acc, num) => acc * num, 1);
+                    break;
+                case 'divide':
+                    result = numbers.reduce((acc, num) => acc / num);
+                    break;
+                default:
+                    result = 'Invalid operation';
+            }
+
+            document.getElementById('result').innerText = `Result: ${result}`;
+        }
+    </script>
+</body>
+</html>
